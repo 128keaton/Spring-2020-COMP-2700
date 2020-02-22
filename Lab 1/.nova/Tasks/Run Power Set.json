@@ -1,0 +1,8 @@
+{
+  "script" : "#!\/bin\/sh\npython power_set.py",
+  "actions" : [
+    "run"
+  ],
+  "identifier" : "33DD301B-B849-44C9-9EFE-60D974DA1DE1",
+  "openLogOnRun" : "start"
+}
