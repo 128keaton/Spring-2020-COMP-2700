@@ -2,6 +2,7 @@
 # kbrleson
 from lib.pwetty_pwint_0w0 import pretty_print;
 from time import process_time 
+from copy import deepcopy
 
 # 1
 def power_set(set):
@@ -23,22 +24,18 @@ def k_subsets_naive(set, cardinality):
 	return final_set
 
 # 3
-def k_subsets_better(set, cardinality):
+def k_subsets_better(items, cardinality):
 	final_set = []
 	
-	if cardinality > 0 and cardinality <= len(set):
-		if cardinality == len(set):
-			final_set = [set]
+	if cardinality > 0 and cardinality <= len(items):
+		if cardinality == len(items):
+			final_set = [items]
 		else: 
-			element = set.pop(-1)
-			final_set = k_subsets_better(set, cardinality)
-			subsets = power_set(set)
-			for subset in subsets:
-				if len(subset) == cardinality - 1:
-					subset.append(element)
-					final_set.append(subset)
-				
-				
+			set_clone = deepcopy(items)
+			element = set_clone.pop(1)
+			final_set = k_subsets_better(set_clone, cardinality)
+			subsets = power_set(items)
+			[final_set.append(subset) for subset in subsets if len(subset) == cardinality and subset not in final_set]
 			
 	return final_set
 
@@ -47,12 +44,12 @@ original_set = ['Torchic', 'Piplup', 'Rowlet']
 power_set_result = power_set(original_set)
 
 naive_start_time = process_time()
-subsets_naive_result = k_subsets_naive([4, 5, 6, 7], 2)
+subsets_naive_result = k_subsets_naive(['x', 'y', 'z', 'w'], 2)
 naive_end_time = process_time()
 naive_elapsed = naive_end_time = naive_start_time
 
 better_start_time = process_time()
-subsets_better_result = k_subsets_better([4, 5, 6, 7], 3)
+subsets_better_result = k_subsets_better(['x', 'y', 'z', 'w'], 2)
 better_end_time = process_time()
 better_elapsed = better_end_time - better_start_time
 
