@@ -1,5 +1,5 @@
 {
-  "script" : "#!\/bin\/sh\npython power_set.py",
+  "script" : "#!\/bin\/sh\npython3 main.py",
   "actions" : [
     "run"
   ],
