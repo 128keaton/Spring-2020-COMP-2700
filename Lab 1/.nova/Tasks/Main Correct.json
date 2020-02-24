@@ -1,0 +1,8 @@
+{
+  "script" : "#!\/bin\/sh\npython3 main-correct.py",
+  "actions" : [
+    "run"
+  ],
+  "identifier" : "1A40722F-313C-46DD-B6E3-349D42CB278A",
+  "openLogOnRun" : "start"
+}
