@@ -40,7 +40,7 @@ def k_subsets_better(items, cardinality):
 	return final_set
 
 
-original_set = ['Torchic', 'Piplup', 'Rowlet']
+original_set = ['∅']
 power_set_result = power_set(original_set)
 
 naive_start_time = process_time()
