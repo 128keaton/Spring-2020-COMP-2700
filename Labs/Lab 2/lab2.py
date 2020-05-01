@@ -69,7 +69,7 @@ if __name__ == '__main__':
 	print("--------------------------------------------------------")
 	
 
-	print("Output of 'matrix_print(R)' ")
+	print("Output of 'matrix_print(R)' \n")
 	matrix_print(R)
 	print("\n\n")
 	
@@ -86,7 +86,7 @@ if __name__ == '__main__':
 	print(B)
 	print("--------------------------------------------------------")
 	
-	print("Output of 'matrix_add_boolean(A, B)' ")
+	print("Output of 'matrix_add_boolean(A, B)' \n")
 	print(matrix_add_boolean(A, B))
 	print("\n\n")
 
@@ -102,7 +102,7 @@ if __name__ == '__main__':
 	print(B)
 	print("--------------------------------------------------------")
 
-	print("Output of 'matrix_multiply_boolean(A, B)' ")
+	print("Output of 'matrix_multiply_boolean(A, B)'\n ")
 	print(matrix_multiply_boolean(A, B))
 	print("\n\n")
 	
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 	print("--------------------------------------------------------")
 	
 
-	print("Output of 'matrix_power(R, 2)' ")
+	print("Output of 'matrix_power(R, 2)' \n")
 	print(matrix_power(R, 2))
 	print("\n\n")
 	
@@ -124,6 +124,6 @@ if __name__ == '__main__':
 	print("--------------------------------------------------------")
 	
 
-	print("Output of 'transitive_closure(R)' ")
+	print("Output of 'transitive_closure(R)' \n")
 	print(transitive_closure(R))
 	print("\n\n")

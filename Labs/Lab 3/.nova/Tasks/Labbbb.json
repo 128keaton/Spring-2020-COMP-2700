@@ -1,0 +1,10 @@
+{
+  "actions" : {
+    "run" : {
+      "enabled" : true,
+      "script" : "python3 lab3.py"
+    }
+  },
+  "identifier" : "36CBF1AA-24A0-49DE-B7B0-4A5F48815022",
+  "openLogOnRun" : "start"
+}
