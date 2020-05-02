@@ -81,6 +81,7 @@ def check_prime(any_number):
 	else:
 		return False
 		
+## Request a prime number from the user
 def request_prime_number(second_number=False):
 	if (second_number == False):
 		prime_number = input("Please enter a prime number: ")
@@ -99,7 +100,8 @@ def request_prime_number(second_number=False):
 	else:
 		print('%i is not a prime number. Please try again!' % prime_number)
 		return request_prime_number(second_number)
-		
+
+## Request a 'plain_text' number from the user		
 def request_plain_text():
 	plain_text = input("Please enter a number you would like to encrypt: ")
 	try:
