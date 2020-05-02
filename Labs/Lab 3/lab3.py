@@ -1,4 +1,9 @@
-import math
+#################
+## kbrleson    ##
+## COMP-2700   ##
+## Spring 2020 ##
+#################
+
 
 ## Problem 1
 def gcd(x, y):
@@ -31,57 +36,104 @@ def mod_inv(a, m):
   
     return x 
 	
-## Problem 3
+## Problem 3		
 def mod_exp(x, y, N):
-    if y == 0:
-        return 1
-    else:
-        z = mod_exp(x, math.floor(y/2), N)
-        if (y % 2) == 0:
-            return ((pow(z, 2)) % N)
-        else:
-            return ((pow(z, 2) * x) % N)
+	result = 1
+	b = x
+	c = y
+	
+	while c > 0:
+		if (c % 2 == 1):
+			result = result * b % N
+		
+		b = b * b % N
+		c = c // 2
+	
+	return result
+		
 	
 ## Problem 4
 def generate_RSA_keys(p, q):
-	print('Generating RSA keys...')
 	a = (q - 1) * (p - 1) 
 	b = p * q
 	c = 3
 	
-	while gcd(c, a) != 1:
-		c = c + 2
+	while gcd(a, c) != 1:
+		c += 2
 	
 	return [[b, c], mod_inv(c, a)]
 	
-	
-def decrypt(p, q, C, keys):
-	public_key = keys[0][0]
-	private_key = keys[1]
-	
-	a = (p - 1) * (q - 1)
-	b = mod_inv(private_key, a)
-	return mod_exp(C, b, p * q)
+## Decrypt encrypted_text given the public_key and private_key
+def decrypt(public_key, private_key, encrypted_text):
+	N, e = public_key
+	return mod_exp(encrypted_text, private_key, N)
 
-def encrypt(private_key, plain_text):
-	key = private_key
-	cipher = [(ord(char) ** private_key) % key for char in range(len(str(plain_text)))]
-	return cipher
+## Encrypt plain_text given the public_key
+def encrypt(public_key, plain_text):
+	N, e = public_key
+	return mod_exp(plain_text, e, N)
 	
-def test_encryption(p, q, M):
-	keys = generate_RSA_keys(p, q)
-	# [[84907, 3], 56187]
-	public_key = keys[0][0]
-	private_key = keys[1]
-	
-	print('Public key: %i' % public_key)
-	print('Private key: %i' % private_key)
-	print('Plain text: %i' % M)
-	
-	cipher = encrypt(public_key, M)
-	print('Cipher text: %i' % cipher)
-	
-	print(decrypt(p, q, cipher, keys))
+## Returns True for a prime number, False for anything else
+def check_prime(any_number):
+	if any_number > 1:
+		for i in range(2, any_number // 2):
+			return any_number % i != 0
+	else:
+		return False
 		
-
-test_encryption(431, 197, 4)
+def request_prime_number(second_number=False):
+	if (second_number == False):
+		prime_number = input("Please enter a prime number: ")
+	else:
+		prime_number = input("Please enter another prime number: ")
+		
+	try:
+		prime_number = int(prime_number)
+	except ValueError:
+		print('%s is not a prime number. Please try again!' % prime_number)
+		return request_prime_number(second_number)
+		
+		
+	if (check_prime(prime_number)):
+		return prime_number
+	else:
+		print('%i is not a prime number. Please try again!' % prime_number)
+		return request_prime_number(second_number)
+		
+def request_plain_text():
+	plain_text = input("Please enter a number you would like to encrypt: ")
+	try:
+		plain_text = int(plain_text)
+	except ValueError:
+		print('%s is not a number. Please try again!' % plain_text)
+		return request_plain_text()
+		
+	return plain_text
+		
+	
+## Problem 5
+if __name__ == '__main__':
+	# Get prime numbers from the user
+	first_prime = request_prime_number(False)
+	second_prime = request_prime_number(True)
+	
+	print('Now generating RSA private/public keys with primes %i, %i' % (first_prime, second_prime))
+	
+	keys = generate_RSA_keys(first_prime, second_prime)
+	public_key = keys[0]
+	private_key = keys[1]
+	
+	print('Done!')
+	print('----------------------------------------------------')
+	print('Public key: [%i, %i]' % (public_key[0], public_key[1]))
+	print('Private key: %i' % private_key)
+	print('----------------------------------------------------')
+		
+	plain_text = request_plain_text()
+	print('\nPlain text before encryption: %i\n' % plain_text)
+	
+	encrypted_text = encrypt(public_key, plain_text)
+	print('Encrypted text: %i\n' % encrypted_text)
+	
+	decrypted_text = decrypt(public_key, private_key, encrypted_text)
+	print('Decrypted text: %i\n' % decrypted_text)
